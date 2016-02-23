@@ -1,0 +1,2 @@
+# baiduhot
+Get Baidu hot.
