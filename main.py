@@ -1,6 +1,8 @@
-# -*- coding:utf-8 -*-
-# __author__ = 'kohna'
-# Create at 2015-09-01
+# -*- coding: UTF-8     -*-
+# -*- author: kohna     -*-
+# -*- date  : 2015-09-01-*-
+# -*- time  : 11:20     -*-
+
 import os
 import re
 import time
@@ -12,11 +14,11 @@ import logging
 mon = time.strftime('%Y%m', time.localtime())
 day = time.strftime('%Y%m%d', time.localtime())
 sqlDB = mon + '.db3'
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.ERROR,
                     format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
                     datefmt='%a, %d %b %Y %H:%M:%S',
                     filename="hot.log",
-                    filemode='w'
+                    filemode='w+'
                     )
 
 
@@ -32,7 +34,7 @@ class GetHotPointList:
 
     def getdata(self):
         try:
-            self.soucdata = requests.get(self.url,timeout=10)
+            self.soucdata = requests.get(self.url, timeout=10)
             reres = re.findall(self.res, self.soucdata.content)
             if len(reres) > 0:
                 evalres = eval(reres[0])
@@ -84,6 +86,7 @@ def delbs(b):
     dbx.sqlexe()
     dbx.dbclose()
 
+
 if __name__ == '__main__':
     bs = []
     checks(bs)
@@ -101,7 +104,8 @@ if __name__ == '__main__':
             detailurl = hoy.sdcit[iui]['detail_url']
             clicks = str(hoy.sdcit[iui]['clicks'])
             cloc = time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time()))
-            db.sql = "INSERT INTO tb_" + day + "(b,title,toptype,trend,titurl,clicks,cloc) VALUES (" + str(b[0]) + ",'" + b[1] + "','" + title + "','" + trend + "','" + titurl + "','" + clicks + "','" + cloc + "')"
+            db.sql = "INSERT INTO tb_" + day + "(b,title,toptype,trend,titurl,clicks,cloc) VALUES (" + str(b[0]) + ",'" + b[
+                1] + "','" + title + "','" + trend + "','" + titurl + "','" + clicks + "','" + cloc + "')"
             db.sqlexe()
             iui += 1
         db.dbclose()
