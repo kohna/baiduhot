@@ -1,13 +1,14 @@
 # -*- coding:utf-8 -*-
 # __author__ = 'kohna'
 # Create at 2015-09-01
+import os
 import re
 import time
 import sqlite3
 import requests
 import logging
 
-
+# os.chdir("/opt/.python/bd/")
 mon = time.strftime('%Y%m', time.localtime())
 day = time.strftime('%Y%m%d', time.localtime())
 sqlDB = mon + '.db3'
@@ -88,7 +89,6 @@ if __name__ == '__main__':
     checks(bs)
     for b in bs:
         hoy = GetHotPointList(b)
-        print b[1]
         hoy.getdata()
         iui = 0
         db = DBopt(sqlDB)
@@ -105,3 +105,4 @@ if __name__ == '__main__':
             db.sqlexe()
             iui += 1
         db.dbclose()
+    exit(0)
