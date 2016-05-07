@@ -10,6 +10,7 @@ import sqlite3
 import requests
 import logging
 
+
 # os.chdir("/opt/.python/bd/")
 mon = time.strftime('%Y%m', time.localtime())
 day = time.strftime('%Y%m%d', time.localtime())
